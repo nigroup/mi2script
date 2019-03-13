@@ -1,0 +1,44 @@
+\section{Introductory comments}
+
+Methods subsumed under the term \emph{unsupervised learning} deal with
+finding structure or regularities in a set of observations
+$\vec{x}^{(1)}, \vec{x}^{(2)}, \ldots,\vec{x}^{(p)}$.
+
+
+\paragraph{What is the statistical structure of the data?} \mbox{}\\\\
+Many datasets ...
+\begin{itemize}
+\item[...] are high-dimensional \ra visualization \& dimension reduction
+\item[...] are grouped or clustered \ra definition of groups / categories, construction of taxonomies, preprocessing for prediction (clustering)
+\item[...] may display interesting (or uninteresting) directions \ra
+  definition of ''informative'' features (projection methods)
+\item[...] may be determined by different causes \ra unmixing a mixture of sources, definition
+  of components, infering causes
+\end{itemize}
+
+\paragraph{Motivation:} 
+In contrast to methods of \emph{supervised learning} (see MI1), there
+is no additional information in terms of ``labels''
+$\vec{y}^{(\alpha)}$ providing a ``correct'' classification or target
+value for data point $\alpha$.
+\\\\
+The statistical structure of a data set is often interesting in itself
+and can be exploited for knowledge extraction (modeling).
+Furthermore, it allows to find new representations of the data
+$\vec{x}$ that allow more efficient data storage ($\leadsto$
+dimensionality reduction, data compression) or are better suited to
+solve supervised problems such as prediction, classification,
+reasoning, decision making.
+
+\paragraph{Unsupervised learning \& statistical data analysis:}
+methods for the extraction of the statistical ''structure'' underlying
+a set of observations (or a data structure)
+\begin{itemize}
+	\itR projection methods: search for ''interesting'' directions in 
+		feature space
+	\itR clustering methods: grouping \& categorization (and prototypes)
+\end{itemize}
+\emph{Note:} Both PCA and ICA (discussed in chapters \ref{sec:PCA} and
+\ref{sec:ICA}) are linear projection methods.  In many
+cases (e.g.\ PCA) kernel methods allow to extend them to nonlinear
+problems.

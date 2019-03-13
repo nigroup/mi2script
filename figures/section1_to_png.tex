@@ -1,0 +1,54 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{./include/matrices}
+\usepackage{graphicx}
+%\usepackage{pictex}
+\pagestyle{fancy}
+\begin{document}
+\renewcommand{\vec}[1]{\ensuremath{\underline{\mathbf{#1}}}}
+% Equal sign with hat on top:			
+\newcommand{\corresponds}{\ensuremath{\widehat{=}}}
+
+\section{fig 1 - handwritten page 2}
+\[\substack{	\text{estimate of the density} \\
+		\text{at a given point } \vec{x}}
+\]
+observations
+
+\section{fig 2 - handwritten page 2}
+Gaussian kernel \\\\
+histogram kernel\\\\
+$H$\\\\
+$u$
+
+\section{fig 3 - handwritten page 4}
+true density \\\\
+$P$\\\\
+$\widehat{P}$
+\[ \substack{ 	\text{estimated density} \\
+		\text{(optimal w.r.t } E^T \text{)} }
+\]
+
+\section{fig 4 - handwritten page 5}
+test data \\\\
+model density I \\\\
+model density II
+
+\section{fig 5 - handwritten page 8}
+Gauss\\\\
+$\vec{w}^*$ \\\\
+$\widehat{\vec{w}}$\\\\
+\[ \substack{ 	\text{width}^2 \text{ (variance) given} \\
+		\text{by Fisher information matrix} \\
+		\text{(} \leadsto \text{error measure for } 
+			\widehat{\vec{w}} \text{)}}
+\]
+	
+\end{document}

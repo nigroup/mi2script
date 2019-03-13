@@ -1,0 +1,129 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{../../include/matrices}	
+\usepackage{../../include/mathrsfs}
+\input{../../machine_intelligence2_script_commands}
+\usepackage{graphicx}
+\pagestyle{fancy}
+
+% ---------------------------- Headers ----------------------------------------
+% Preamble for standalone proofs as used in pure supplementary material.
+\lhead{Machine Intelligence II\\Prof. Dr. Obermayer}
+\chead{Proof}
+\rhead{\\Supplementary Material}
+% -----------------------------------------------------------------------------
+
+\begin{document}
+\section{Convergence Properties of Oja's Rule}
+\textcircled{1} small learning steps $\leadsto$ average over all patterns
+\begin{equation}
+	\begin{array}{ll}
+	\Delta \mathrm{w}_j 
+		& = \frac{\epsilon}{p} \sum\limits_{\alpha = 1}^p
+			\bigg\{ \sum\limits_{k = 1}^N \mathrm{w}_k 
+			\mathrm{x}_k^{(\alpha)} \mathrm{x}_j^{(\alpha)}
+			- \mathrm{w}_j \sum\limits_{k,l = 1}^N
+			\mathrm{w}_k \mathrm{w}_l 
+			\mathrm{x}_k^{(\alpha)} \mathrm{x}_l^{(\alpha)}
+			\bigg\} \\\\
+		& = \epsilon \bigg\{ \sum\limits_{k = 1}^N 
+			\mathrm{w}_k C_{kj} - \mathrm{w}_j
+			\sum\limits_{k,l = 1}^N \mathrm{w}_k \mathrm{w}_l
+			C_{kl}
+			\bigg\} \\\\
+	\Delta \vec{w} & = \epsilon \Big\{ 
+		\underbrace{ \vec{C} \vec{w} }_{
+			\substack{\text{Hebbian} \\ \text{rule}}}
+		- \underbrace{ 
+			\underbrace{ \big( \vec{w}^T \vec{C} \vec{w} \big) }_{
+			\substack{\text{always} \\ \text{positive}}}
+			\vec{w} }_{\text{decay term}} \Big\}
+	\end{array}
+\end{equation}
+\textcircled{2} stationary states $\vec{w}^*$ of Oja's rule \\
+\indent$\corresponds$ normalized eigenvectors $\vec{e}_j$ of the correlation matrix $\vec{C}$\\\\
+Proof:
+\[ \begin{array}{ll}
+	\text{stationary state:} 
+	& \Delta \vec{w} \eqexcl \vec{0} \\\\
+	\text{ansatz:} 
+	& \vec{w}^* = C \vec{e}_j \sim  \vec{e}_j
+\end{array} \]
+insertion into Oja's rule:
+\begin{equation}
+	\begin{array}{l}
+	\Delta \vec{w} = \epsilon \Big\{ C \lambda_j \vec{e}_j
+		- C^3 \lambda_j \vec{e}_j 
+		\Big\} \eqexcl O \\\\
+	\Rightarrow C^2 = 1 \\\\
+	\Rightarrow \vec{w}^* = \pm \vec{e}_j
+	\end{array}
+\end{equation}
+\textcircled{3} The stationary state $\vec{w}^* = \vec{e}_j$ is stable if and only if $\vec{e}_j = \vec{e}_1$, i.e. if $\vec{e}_j$ is the eigenvactor with the largest eigenvalue.\\\\
+Proof: linear stability analysis
+\[ \begin{array}{l}
+	\lambda_1 > \lambda_2 > \ldots > \lambda_N \text{ eigenvalues of } 
+		\vec{C} \\\\
+	\vec{w} = \vec{e}_j + \vec{\eta} \leftarrow \text{ small deviation
+		from the stationary state}
+\end{array} \]
+\begin{equation}
+	\begin{array}{lll}
+	\Delta \vec{w} =
+	& \Delta \vec{\eta} 
+	& = \epsilon \vec{C} (\vec{e}_j + \vec{\eta}) - \epsilon \Big\{
+		(\vec{e}_j + \vec{\eta})^T \vec{C} (\vec{e}_j + \vec{\eta})
+		\Big\} (\vec{e}_j + \vec{\eta}) \\\\
+	&& = \epsilon \Big\{ \lambda_j \vec{e}_j + \vec{C} \vec{\eta} 
+		- \lambda_j \vec{e}_j - \lambda_j \vec{\eta} 
+		- 2 \lambda_j (\vec{e}_j^T \vec{\eta}) (\vec{e}_j + \vec{\eta})
+		- (\vec{\eta}^T \vec{C} \vec{\eta})(\vec{e}_j + \vec{\eta})
+		\Big\} \\\\
+	& \Delta{\eta} 
+	& = \epsilon \Big\{ - 2 \lambda_j (\vec{e}_j^T \vec{\eta}) \vec{e}_j
+		+ \vec{C} \vec{\eta} - \lambda_j \vec{\eta}
+		\Big\} + \underbrace{ O_{(\vec{\eta}^2)} }_{
+			\substack{ \text{discarded for} \\ |\vec{\eta}| 
+				\rightarrow 0}}
+	\end{array}
+\end{equation}
+Projection onto the eigenvectors $\vec{e}_k$:
+\begin{equation}
+	\vec{e}_k^T \Delta \vec{\eta} = \epsilon \Big\{
+		(\lambda_k - \lambda_j) \vec{e}_k^T \vec{\eta} 
+		- 2 \lambda_k (\vec{e}_k^T \vec{\eta}) 
+		\underbrace{ \delta_{kj} }_{\substack{
+			\text{Kronecker-} \\ \text{Delta}}}
+		\Big\}
+\end{equation}
+\underline{case I:} $k = j$
+\begin{equation}
+	\begin{array}{l}
+		\vec{e}_k^T \Delta \vec{\eta} = 
+		\underbrace{ -2 \epsilon \lambda_k}_{
+			\substack{\text{always} \\ \text{negative}}}
+		\vec{e}_k^T \vec{\eta} \\\\
+		\Rightarrow \vec{e}_k^T \vec{\eta} \rightarrow 0
+	\end{array}
+\end{equation}
+\underline{case II:} $k \neq j$
+\begin{equation}
+	\begin{array}{l}
+	\vec{e}_k^T \Delta \vec{\eta} = 
+	\underbrace{ \epsilon (\lambda_k - \lambda_j) }_{
+		\substack{\text{factor is negative} \\
+			\text{only if } \lambda_j \text{ is} \\
+			\text{the largest eigenvalue}}} 
+		\vec{e}_k^T \vec{\eta} \\\\
+	\Rightarrow \text{ if } \lambda_j = \lambda_1, \text{ then }
+		\vec{e}_k^T \vec{\eta} \rightarrow 0
+	\end{array}
+\end{equation}
+\end{document}

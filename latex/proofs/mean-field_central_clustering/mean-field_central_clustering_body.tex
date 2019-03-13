@@ -1,0 +1,64 @@
+\subsection{Mean-fields for central clustering}
+\begin{equation}
+	d_{\alpha\gamma} = \frac{1}{2} \big( \vec{x}^{(\alpha)} 
+		- \vec{x}^{(\gamma)} \big)^2, \text{ approximation to }
+		O_{\big( \frac{1}{p} \big)}
+\end{equation}
+\begin{equation}
+	\begin{array}{lll}
+	e_p^{(\alpha)}
+	& = & \frac{1}{M \sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)}
+		\big>_Q \big( \vec{x}^{(\delta)} - \vec{x}^{(\alpha)} \big)^2
+		\\\\
+	&& -\frac{1}{M \sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)} \big>_Q
+		\sum\limits_{\varepsilon \neq \alpha} \big<m_p^{(\varepsilon)}
+		\big>_Q \big( \vec{x}^{(\delta)} 
+		- \vec{x}^{(\varepsilon)} \big)^2 \\\\
+	& = & \frac{1}{M \sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)}
+		\big>_Q \bigg\{ \vec{x}^{(\delta)} - 2\big(\vec{x}^{(\delta)}
+			\big)^T \vec{x}^{(\alpha)} + \big(\vec{x}^{(\alpha)}
+			\big)^2\bigg\} \\\\
+	&& -\frac{1}{M \sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)}
+		\big>_Q \sum\limits_{\varepsilon \neq \alpha}
+			\big< m_p^{(\varepsilon)} \big>_Q \\\\
+	&& \cdot\bigg\{ \big( \vec{x}^{(\delta)} \big)^2 
+			- 2\big(\vec{x}^{(\delta)}
+			\big)^T \vec{x}^{(\varepsilon)} 
+			+ \big(\vec{x}^{(\varepsilon)} \big)^2\bigg\} \\\\
+	& = & \frac{1}{M} \Bigg[ \frac{\sum\limits_{\delta \neq \alpha} 
+		\big< m_p^{(\delta)} \big>_Q \big(\vec{x}^{(\delta)} \big)^2 }{
+			\sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		-2 \frac{\big(\vec{x}^{(\alpha)} \big)^T 
+			\sum\limits_{\delta \neq \alpha} 
+			\big< m_p^{(\delta)} \big>_Q \vec{x}^{(\delta)}}{
+				\sum\limits_\gamma \big< m_p^{(\gamma)}
+				\big>_Q} + \big( \vec{x}^{(\alpha)} \big)^2
+			\Bigg] \\\\
+	&& - \frac{1}{M \sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)}
+		\big>_Q \Bigg\{ \frac{\sum\limits_{\varepsilon \neq \alpha} 
+		\big< m_p^{(\varepsilon)} \big>_Q 
+		\big(\vec{x}^{(\varepsilon)} \big)^2 }{
+			\sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q} \\\\
+	&& -2 \frac{\big(\vec{x}^{(\delta)} \big)^T 
+			\sum\limits_{\varepsilon \neq \alpha} 
+			\big< m_p^{(\varepsilon)} \big>_Q 
+			\vec{x}^{(\varepsilon)}}{
+				\sum\limits_\gamma \big< m_p^{(\gamma)}
+				\big>_Q} + \big( \vec{x}^{(\delta)} \big)^2
+		\Bigg\} \\\\
+	& \approx & \frac{1}{M} \bigg[ \big( \vec{x}^{(\alpha)} \big)^2 
+		-2 \big( \vec{x}^{(\alpha)} \big)^T \vec{w}_p + \vec{w}_p^2
+		\bigg]
+	\end{array}
+\end{equation}
+with:
+\begin{equation}
+	\vec{w}_p = \frac{\sum\limits_p \big< m_p^{(\gamma)} \big>_Q
+			\vec{x}^{(\gamma)} }{ \sum\limits_\gamma
+				\big< m_p^{(\gamma)} \big>_Q}
+\end{equation}

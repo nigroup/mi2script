@@ -1,0 +1,55 @@
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb,amsmath,amsfonts,mathrsfs,array}
+\usepackage{enumerate,graphicx,fancyhdr,hyperref}
+\usepackage[ruled]{algorithm2e}
+%\usepackage{a4wide,wasysym} 
+\usepackage{tikz,tkz-berge}
+\usepackage{multirow,bigdelim}
+\usepackage{mathtools}
+\usepackage{commath}
+\usetikzlibrary{arrows,topaths}
+\hypersetup{pdfborder={0 0 0}} % links wont be visualized in the pdf
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\graphicspath{{../figures/pdf/}{../figures/png/}}
+\pagestyle{fancy}
+
+% ---------------------------- Page Headers (& footers)------------------------
+\fancyhead[R]{\nouppercase{\rightmark}}
+
+% --------------------- Equation Numbering-------------------------------------
+\renewcommand {\theequation}{\thesection.\arabic{equation}}			
+%\newcommand{\slideref}[1]{$\Box$\footnote{slide: #1}}
+\newcommand{\slideref}[1]{\marginpar{$\Box$\parbox{1.25cm}{\centering\tiny #1}}}
+
+
+% ------------------------- New Commands --------------------------------------
+\newcommand{\eqexcl}{\ensuremath{\stackrel{\mathrm{!}}{=}}}
+\newcommand{\corresponds}{\ensuremath{\widehat{=}}}
+\newcommand{\coloneqq}{\ensuremath{:=}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\emp}{\operatorname{emp}}
+\newcommand{\dkl}{D_{KL}}
+\newcommand{\dvc}{\mathrm{d}_{\mathrm{VC}}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\itr}{\item[$\rightarrow$]}
+\newcommand{\itR}{\item[$\Rightarrow$]}
+\newcommand{\itl}{\item[$\leadsto$]}
+\newcommand{\kurt}{\operatorname{kurt}}
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\ra}{$\rightarrow\;$}
+
+% matrices with different types of brackets 
+\newcommand{\mat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{
+  \left[ \begin{array}{#1} #2\\ \end{array} \right]}
+\newcommand{\rmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{
+  \left( \begin{array}{#1} #2\\ \end{array} \right)}
+\newcommand{\dmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{
+  \left|\left[ \begin{array}{#1} #2\\ \end{array} \right]\right|}
+\newcommand{\drmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{
+  \left|\left( \begin{array}{#1} #2\\ \end{array} \right)\right|}
+\renewcommand{\vec}[1]{\ensuremath{\underline{\mathbf{#1}}}}
+% NOTE: Vector notation used in neural network textbooks -- this is 
+% easier to read for expressions like \hat{\underline{\mathbf{w}}}. 
+

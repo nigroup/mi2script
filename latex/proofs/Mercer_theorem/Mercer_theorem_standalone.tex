@@ -1,0 +1,69 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{../../include/matrices}	
+\usepackage{../../include/mathrsfs}
+\input{../../machine_intelligence2_script_commands}
+\usepackage{graphicx}
+\pagestyle{fancy}
+
+% ---------------------------- Headers ----------------------------------------
+% Preamble for standalone proofs as used in pure supplementary material.
+\lhead{Machine Intelligence II\\Prof. Dr. Obermayer}
+\chead{Proof}
+\rhead{\\Supplementary Material}
+% -----------------------------------------------------------------------------
+
+\begin{document}
+\section{Mercer's Theorem}
+Preliminaries:
+\[ \begin{array}{ll}
+	\chi: & \text{compact subset of } \mathbb{R}^N \\\\
+	K: & \chi \times \chi \rightarrow \mathbb{R}, k \in L_\alpha,
+		\text{ symmetric function (''kernel'')} \\\\
+	\left. \begin{array}{ll}
+	T_k: & L_{2 (\chi)} \rightarrow L_{2 (\chi)} \\\\
+	(T_k f)_{(\vec{x})} \coloneqq & \int_\chi K_{(\vec{x},\vec{x}')}
+		f_{(\vec{x}')} d \vec{x}'
+	\end{array} \right \} & \text{corresponding integral operator} \\\\
+	\left. \begin{array}{ll}
+	\lambda_j: & \text{eigenvalues} \\\\
+	\psi_j \in L_{2 (\chi)}:	& \text{normalized eigenfunction}
+	\end{array} \right \} & \text{of } T_k
+\end{array} \]
+essential condition: $T_k$ positive definite
+\begin{equation}
+	\int_{\chi \times \chi} K_{(\vec{x}, \vec{x}')} f_{(\vec{x})}
+		f_{(\vec{x}')} d \vec{x} d \vec{x}' > 0 
+	\indent \forall f \in L{2 (\chi)}
+\end{equation}
+then:
+\begin{equation}
+	\begin{array}{l}
+	K_{(\vec{x}, \vec{x}')} = \sum\limits_{j = 1}^n \lambda_j 
+		\underbrace{ \psi_{j (\vec{x})} \psi_{j (\vec{x}')} }_{
+			\substack{\text{eigenvalue} \\ \text{decomposition}}}
+			\\\\
+	n \rightarrow \infty: \text{ absolute and uniform convergence 
+		(non-trivial part)}
+	\end{array}
+\end{equation}
+consequences of Mercer's theorem:
+\begin{equation}
+	\begin{array}{l}
+	\vec{\phi}: \vec{x} \rightarrow 
+		\big( \sqrt{\lambda_1} \psi_{1(\vec{x})},
+		\sqrt{\lambda_2} \psi_{2(\vec{x})}, \ldots,
+		\sqrt{\lambda_n} \psi_{n(\vec{x})}
+		\big)^T \\\\
+	K_{(\vec{x}, \vec{x}')} = \vec{\phi}_{(\vec{x})}^T 
+		\vec{\phi}_{(\vec{x}')}
+	\end{array}
+\end{equation}
+\end{document}

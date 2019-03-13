@@ -1,0 +1,42 @@
+\subsection{Natural gradient - alternate derivation}
+\begin{equation}
+	\begin{array}{ll}
+	de & = \sum\limits_{i,j} \frac{\partial e}{\partial \mathrm{w}_{ij}}
+		d \mathrm{w}_{ij} \\\\
+	& = \sum\limits_{i,j} \varphi_i \mathrm{x}_j d \mathrm{w}_{ij} + 
+		\sum\limits_{i,j} \big( \vec{w}^{-1} \big)_{ji} d 
+		\mathrm{w}_{ij} \\\\
+	& = \vec{\varphi}^T d \vec{w} \vec{x} + \mathrm{Tr} \big(
+		d \vec{w} \cdot \vec{w}^{-1} \big) \\\\
+	& = \vec{\varphi}^T 
+		\underbrace{ \big( d \vec{w} \cdot \vec{w}^{-1} \big) 
+		\overbrace{ \vec{\widehat{s}} }^{\vec{\widehat{s}} = \vec{w}
+			\vec{x}}
+		+ \mathrm{Tr} \big( d \vec{w} \cdot
+		\vec{w}^{-1} \big) }_{d \vec{Z}}
+	\end{array}
+\end{equation}
+with 
+\begin{equation}
+	d \vec{Z} = d \vec{w} \cdot \vec{w}^{-1} 
+\end{equation}
+we obtain
+\begin{equation}
+	de = \vec{\varphi}^T \vec{\widehat{s}} d \vec{Z} + \mathrm{Tr}(d\vec{Z})
+\end{equation}
+gradient ascent learning
+\begin{equation}
+	\begin{array}{ll}
+	\Delta \mathrm{Z}_{ij} & = \eta \frac{\partial e}
+		{\partial \mathrm{z}_{ij}} \\\\
+	& = \eta \big( \varphi_i \widehat{s}_j + \delta_{ij} \big) \\\\
+	& = \eta \Big( \varphi_i \sum\limits_k \mathrm{w}_{jk} \mathrm{x}_k
+		+ \delta_{ij} \Big) \\\\
+	& = \sum\limits_k \Delta \mathrm{w}_{jk} \big( \vec{w}^{-1} \big)_{kj}
+	\end{array}
+\end{equation}
+\begin{equation}
+	\Delta \mathrm{w}_{il} = \eta \Big( \mathrm{w}_{il} + \varphi_i
+		\sum\limits_{k,j} \mathrm{w}_{jl} \mathrm{w}_{jk} \mathrm{x}_k
+		\Big)
+\end{equation}

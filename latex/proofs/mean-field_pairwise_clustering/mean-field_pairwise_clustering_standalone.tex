@@ -1,0 +1,272 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{../../include/matrices}	
+\usepackage{../../include/mathrsfs}
+\input{../../machine_intelligence2_script_commands}
+\usepackage{graphicx}
+\pagestyle{fancy}
+
+% ---------------------------- Headers ----------------------------------------
+% Preamble for standalone proofs as used in pure supplementary material.
+\lhead{Machine Intelligence II\\Prof. Dr. Obermayer}
+\chead{Proof}
+\rhead{\\Supplementary Material}
+% -----------------------------------------------------------------------------
+
+\begin{document}
+\section{Mean-field for pairwise clustering}
+Self-consistent equations for the mean-field $\circleddash$
+\begin{equation}
+	\frac{\partial \big<E^p\big>_Q}{\partial e_r^{(\alpha)}}
+	=\sum\limits_p \frac{\partial \Big<m_p^{(\alpha)}\Big>_Q}{
+		\partial e_r^{(\alpha)}} e_r^{(\alpha)}
+\end{equation}
+useful relations:\\
+\textcircled{1}
+\begin{equation}
+	\frac{m_p^{(\alpha)}}{\sum\limits_\gamma m_p^{(\gamma)}} 
+	= \frac{m_p^{(\alpha)}}{\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)}
+		+ 1}
+\end{equation}
+\textcircled{2} from $\frac{1}{a+b} = \frac{1}{a} \Big(1 - \frac{b}{a+b} \Big)$ it follows
+\begin{equation}
+	\begin{array}{ll}
+	\frac{1}{\sum\limits_\gamma m_p^{(\gamma)}} 
+	& = \frac{1}{\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} 
+		+ m_p^{(\alpha)}} \\\\
+	& = \frac{1}{\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)}}
+		\Bigg\{ 1 - \frac{m_p^{(\alpha)}}{\sum\limits_{\gamma
+			\neq \alpha} m_p^{(\gamma)} + m_p^{(\alpha)}}
+		\Bigg\} \\\\
+	& = \frac{1}{\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)}}
+		\Bigg\{	1 - \frac{m_p^{(\alpha)}}{\sum\limits_{\gamma \neq
+			\alpha} m_p^{(\gamma)} + 1}
+		\Bigg\}
+	\end{array}
+\end{equation}
+derivations of the expected cost:
+\begin{equation}
+	\begin{array}{ll}
+	\frac{\partial \big< E^p \big>_Q}{\partial e_r^{(\alpha)}}
+	& = \frac{1}{M} \sum\limits_{p,\delta,\varepsilon} 
+		\underbrace{\frac{\partial}{
+		\partial e_r^{(\alpha)}} \Bigg< \frac{m_p^{(\delta)} 
+			m_p^{(\varepsilon)}}{\sum\limits_\gamma
+				m_p^{(\gamma)}}
+		\Bigg>_Q d_{\delta \varepsilon}}_{\circledast} \\\\
+	& = \frac{1}{M} \sum_p \Bigg\{ 
+		\sum\limits_{\substack{\delta, \varepsilon \\ \delta \neq 
+			\varepsilon; \delta, \varepsilon \neq \alpha}} 
+			\circledast
+			+ \sum\limits_{\substack{\delta \\ \delta \neq \alpha;
+				\varepsilon = \alpha}} \circledast
+			+ \sum\limits_{\substack{\varepsilon \\ \varepsilon
+				\neq \alpha; \delta = \alpha}} \circledast
+			+ \sum\limits_{\substack{\delta, \varepsilon \\
+				\delta = \varepsilon; \delta, \varepsilon
+				\neq \alpha}} \circledast
+			+ \sum\limits_{\substack{\delta, \varepsilon \\
+				\delta = \varepsilon = \alpha}} \circledast
+		\Bigg\}
+	\end{array}
+\end{equation}
+\newpage
+\noindent calculation of the individual expectations\\\\
+\textcircled{I} $\delta, \varepsilon: \delta \neq \varepsilon; \delta, \varepsilon \neq \alpha$
+\begin{equation}
+	\begin{array}{ll}
+	\Big< \frac{m_p^{(\delta)} m_p^{(\epsilon)}}{\sum\limits_\gamma
+			m_p^{(\gamma)}} \Big>_Q
+	& \underbrace{=}_{\text{using \textcircled{2}}} 
+		\Bigg< \frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+				\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)}}
+			\Bigg\{ 1 - \frac{m_p^{(\alpha)}}{
+				\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)} + 1}
+			\Bigg\}
+		\Bigg>_Q \\\\
+	& = \Bigg< \frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+				\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)}}
+	\Bigg>_Q - \Bigg< \frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+	\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q
+	\end{array}
+\end{equation}
+\textcircled{II} $\delta: \delta \neq \alpha; \varepsilon = \alpha$
+\begin{equation}
+	\begin{array}{ll}
+	\Big< \frac{m_p^{(\delta)} m_p^{(\alpha)}}{\sum\limits_\gamma
+			m_p^{(\gamma)}} \Big>_Q
+	& \underbrace{=}_{\text{using \textcircled{1}}}
+		\Bigg< \frac{m_p^{(\delta)} m_p^{(\alpha)}}{
+			\sum\limits_{\gamma \neq \alpha}
+			m_p^{(\gamma)} + 1}
+		\Bigg>_Q \\\\
+	& = \Bigg< \frac{m_p^{(\delta)}}{\sum\limits_{\gamma \neq \alpha}
+			m_p^{(\gamma)} + 1}
+	\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q
+	\end{array}
+\end{equation}
+\textcircled{III} $\varepsilon: \varepsilon \neq \alpha; \delta = \alpha$
+\begin{equation}
+	\begin{array}{ll}
+	\Big< \frac{m_p^{(\alpha)} m_p^{(\varepsilon)}}{\sum\limits_\gamma
+			m_p^{(\gamma)}} \Big>_Q
+	& \underbrace{=}_{\substack{ \text{in analogy} \\ 
+					\text{to \textcircled{II}}}}
+		\Bigg< \frac{m_p^{(\varepsilon)}}{
+				\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)} + 1}
+		\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q
+	\end{array}
+\end{equation}
+\textcircled{IV} $\delta, \varepsilon: \delta = \varepsilon; \delta, \varepsilon \neq \alpha$
+\begin{equation}
+	\begin{array}{ll}
+		\Bigg< \frac{\big( m_p^{(\varepsilon)} \big)^2 }{
+				\sum\limits_\gamma m_p^{(\gamma)}} \Bigg>_Q
+		& = \Bigg< \frac{m_p^{(\varepsilon)} }{
+				\sum\limits_\gamma m_p^{(\gamma)}} \Bigg>_Q \\\\
+		& \underbrace{=}_{\text{using \textcircled{2}}}
+			\Bigg\{ \Bigg< \frac{m_p^{(\varepsilon)} }{
+				\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)}} \Bigg>_Q
+			- \Bigg< \frac{m_p^{(\varepsilon)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q
+			\Bigg\}
+	\end{array}
+\end{equation}
+\textcircled{V} $\delta, \varepsilon: \delta = \varepsilon = \alpha$
+\begin{equation}
+	\begin{array}{ll}
+	\Bigg< \frac{\big( m_p^{(\alpha)} \big)^2 }{
+				\sum\limits_\gamma m_p^{(\gamma)}} \Bigg>_Q
+		& = \Bigg< \frac{m_p^{(\alpha)} }{
+				\sum\limits_\gamma m_p^{(\gamma)}} \Bigg>_Q \\\\
+		& \underbrace{=}_{\text{using \textcircled{1}}}
+			\Bigg< \frac{1}{\sum\limits_{\gamma \neq \alpha} 
+				m_p^{(\gamma)} + 1}
+			\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q
+	\end{array}
+\end{equation}
+inserting this into the derivative we obtain:
+\begin{equation}
+	\begin{array}{lll}
+	\frac{\partial \big<E^p\big>_Q}{\partial e_r^{(\alpha)}}
+	& = & \frac{1}{M} \sum\limits_p \frac{\partial \big< m_p^{(\alpha)}
+		\big>_Q}{\partial e_r^{(\alpha)}} \cdot \\\\
+	&& \Bigg\{ \underbrace{-\sum\limits_{\substack{ \delta, \varepsilon \\
+				\delta \neq \varepsilon; 
+				\delta, \varepsilon \neq \alpha}}
+		\Bigg< \frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q d_{\delta\varepsilon}}_{
+			\text{from \textcircled{I}}} \\\\
+	&& + \underbrace{ \sum\limits_{\substack{\delta \\ \delta \neq \alpha}}
+		\Bigg< \frac{m_p^{(\delta)}}{\sum\limits_{\gamma \neq \alpha}
+			m_p^{(\gamma)} + 1}
+		\Bigg>_Q \big( d_{\delta\alpha} + d_{\alpha\delta} \big)}_{
+			\text{from \textcircled{II} and \textcircled{III}}} \\\\
+	&& - \underbrace{ \sum\limits_{\substack{\delta \\ \delta \neq \alpha}}
+		\Bigg< \frac{m_p^{(\delta)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q \Big< m_p^{(\alpha)} \Big>_Q d_{\delta\delta} }_{
+			\text{from \textcircled{IV}}} \\\\
+	&& + \underbrace{ \Bigg< \frac{1}{\sum\limits_{\gamma \neq \alpha} 
+				m_p^{(\gamma)} + 1} \Bigg>_Q d_{\alpha\alpha}}_{
+					\text{from \textcircled{V}}}
+	\Bigg\}
+	\end{array}
+\end{equation}
+using eq. $\circleddash$ and comparing coefficients, we find
+\begin{equation}
+	\begin{array}{lll}
+	e_p^{(\alpha)} 
+	& = & \frac{1}{M} \Bigg< \frac{1}{\sum\limits_{\gamma \neq \alpha}
+		m_p^{(\gamma)} + 1} \Bigg>_Q d_{\alpha\alpha} 
+		+ \frac{1}{M} \sum\limits_{\delta \neq \alpha} \Bigg<
+			\frac{m_p^{(\delta)}}{\sum\limits_{\gamma \neq \alpha}
+				m_p^{(\gamma)} + 1} \Bigg>_Q
+		\big\{ d_{\delta\alpha} + d_{\alpha\delta} \big\} \\\\
+	&& - \frac{1}{M} \sum\limits_{\delta \neq \alpha} \Bigg<
+		\frac{m_p^{(\delta)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q d_{\delta\delta} \\\\
+	&& - \frac{1}{M} \sum\limits_{\substack{\delta, \varepsilon \\
+		\delta \neq \varepsilon; \delta,\varepsilon \neq \alpha}} \Bigg<
+		\frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q d_{\delta\varepsilon}
+	\end{array}
+\end{equation}
+approximations for large numbers of data points (neglecting terms $Q_{y_p}$)
+\begin{equation}
+	\begin{array}{rlc}
+		\Bigg< \frac{1}{\sum\limits_{\gamma \neq \alpha}
+			m_p^{(\gamma)} + 1} \Bigg>_Q
+		& \approx \frac{1}{\sum\limits_\gamma \big< m_p^{(\gamma)} 
+			\big>_Q}
+		& \substack{\text{proof via} \\ \text{Taylor expansion}} \\\\
+		\Bigg< \frac{m_p^{(\delta)}}{\sum\limits_{\gamma \neq \alpha}
+			m_p^{(\gamma)} + 1} \Bigg>_Q
+		& \approx \frac{\big< m_p^{(\delta)} \big>_Q}{
+			\sum\limits_\gamma \big< m_p^{(\gamma)} \big>_Q}
+		& \substack{\text{using above} \\ 
+			\text{and relation \textcircled{1}}} \\\\
+		\Bigg< \frac{m_p^{(\delta)} m_p^{(\varepsilon)}}{
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} \Big)
+		\Big(\sum\limits_{\gamma \neq \alpha} m_p^{(\gamma)} + 1 \Big)}
+		\Bigg>_Q
+		& \approx \frac{ \big< m_p^{(\delta)} \big>_Q 
+			\big< m_p^{(\varepsilon)} \big>_Q}{
+		\Big(\sum\limits_{\gamma} \big< m_p^{(\gamma)} \big>_Q \Big)^2}
+		& \substack{\text{using above} \\ 
+			\text{and relation \textcircled{1}}}
+	\end{array}
+\end{equation}
+leads to the self-consistent equations for the mean-fields:
+\begin{equation}
+	\begin{array}{lll}
+		e_p^{(\alpha)}
+		& = & \frac{1}{M} \Bigg[ \frac{1}{\sum\limits_\gamma 
+			\big< m_p^{(\gamma)} \big>_Q}
+			\Bigg\{ d_{\alpha\alpha} - 
+				\frac{1}{\sum\limits_\gamma 
+				\big< m_p^{(\gamma)} 
+			\big>_Q}
+			\sum\limits_{\delta \neq \alpha} \big< m_p^{(\delta)}
+				\big>_Q d_{\delta\delta} \Bigg\} \\\\
+		&& + \frac{1}{\sum\limits_\gamma \big< m_p^{(\gamma)} 
+			\big>_Q} \sum\limits_{\delta \neq \alpha} 
+				\big< m_p^{(\delta)} \big>_Q
+			\Bigg\{ \big( d_{\delta\alpha} + d_{\alpha\delta} 
+			\big) \\\\
+		&& -\frac{1}{2} \frac{1}{\sum\limits_\gamma 
+			\big< m_p^{(\gamma)} \big>_Q}
+			\sum\limits_{\substack{\delta, \varepsilon \\
+				\delta \neq \varepsilon; \delta, \varepsilon
+					\neq \alpha}} 
+				\big< m_p^{(\varepsilon)} \big>_Q
+				\big( d_{\delta\varepsilon} 
+				+ d_{\varepsilon\delta} \big)
+			\Bigg\}
+		\Bigg]
+	\end{array}
+\end{equation}
+\end{document}

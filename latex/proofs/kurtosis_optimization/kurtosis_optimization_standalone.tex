@@ -1,0 +1,86 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{../../include/matrices}	
+\usepackage{../../include/mathrsfs}
+\input{../../machine_intelligence2_script_commands}
+\usepackage{graphicx}
+\pagestyle{fancy}
+
+% ---------------------------- Headers ----------------------------------------
+% Preamble for standalone proofs as used in pure supplementary material.
+\lhead{Machine Intelligence II\\Prof. Dr. Obermayer}
+\chead{Proof}
+\rhead{\\Supplementary Material}
+% -----------------------------------------------------------------------------
+
+\begin{document}
+\section{Kurtosis optimization}
+Two statistically independent sources with $\big< \mathrm{s}_i \mathrm{s}_j \big> = \delta_{ij}$\\
+Extraction from observations (one source)
+\begin{equation}
+	\begin{array}{ll}
+	\widehat{\mathrm{s}} & = \vec{z}^T \vec{s}  \\\\
+	& = \mathrm{z}_1 \mathrm{s}_1 + \mathrm{z}_2 \mathrm{s}_2
+	\end{array}
+\end{equation}
+optimization problem
+\begin{equation}
+	\begin{array}{l}
+	\mathrm{kurt}(\widehat{\mathrm{s}}) \eqexcl \max_{\vec{z}} \\\\
+	\mathrm{z}^2_1 + \mathrm{z}^2_2 \eqexcl 1
+	\end{array}
+\end{equation}
+method of lagrange multiplies
+\begin{equation}
+	\mathrm{kurt}(\widehat{\mathrm{s}}) = \mathrm{z}^4_1 
+		\underbrace{\mathrm{kurt}(\mathrm{s}_1)}_{= a}
+		+ \mathrm{z}^2_2 \underbrace{\mathrm{kurt}(\mathrm{s}_2)}_{
+			= b}
+\end{equation}
+let $a, b > 0$ (special case)
+\begin{equation}
+	a\mathrm{z}^4_1 + b\mathrm{z}^4_2 - \lambda \big(\mathrm{z}^2_1 
+		+ \mathrm{z}^2_2\big) \eqexcl \mathrm{exts.} 
+\end{equation}
+\begin{equation}
+	\begin{array}{lll}
+	4a\mathrm{z}^3_1 - 2\lambda\mathrm{z}_1 = 0
+		& \leadsto \mathrm{z}_1 \big(4a\mathrm{z}^2_1 - 2\lambda
+			\big) = 0
+		& \leadsto \mathrm{z}_1 = \pm \frac{\lambda}{2a}, 0 \\\\
+	4b\mathrm{z}^3_2 - 2\lambda\mathrm{z}_2 = 0
+		& \leadsto \mathrm{z}_2 \big(4a\mathrm{z}^2_2 - 2\lambda
+			\big) = 0
+		& \leadsto \mathrm{z}_2 = \pm \frac{\lambda}{2b}, 0
+	\end{array}
+\end{equation}
+matrix of second derivatives
+\begin{equation}
+	\begin{vmatrix} \begin{pmatrix} 
+		12a\mathrm{z}^2_1 - 2\lambda & 0 \\
+		0 & 12b\mathrm{z}^2_2 - 2\lambda
+	\end{pmatrix} \end{vmatrix}
+	= \big(12a\mathrm{z}^2_1 - 2\lambda\big)
+		\big(12b\mathrm{z}^2_2 - 2\lambda\big)
+\end{equation}
+solutions
+\[ \begin{array}{c|c|c|c|c}
+	\mathrm{z}_1 & \mathrm{z}_2 & \lambda & 1 \% 1 
+		& a\mathrm{z}^4_1 + b\mathrm{z}^4_2 \\
+	\hline 
+	0 & \pm 1 & 2b & -32b^2 & b \\
+	\pm 1 & 0 & 2a & -32a^2 & a \\
+	\pm \frac{b}{\sqrt{a^2 + b^2}} & \pm \frac{a}{\sqrt{a^2 + b^2}}
+		& \frac{2ab}{\sqrt{a^2 + b^2}}
+		& \substack{\text{depending on} \\ \text{values for }a,b}
+		& \substack{\text{at most local optima:} \\
+			\frac{ab}{(a^2+b^2)^2} (a^3+b^3)}
+\end{array}\]
+\end{document}

@@ -1,0 +1,165 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{array}
+%\usepackage{../../include/matrices}	
+\usepackage{../../include/mathrsfs}
+\input{../../machine_intelligence2_script_commands}
+\usepackage{graphicx}
+\pagestyle{fancy}
+
+% ---------------------------- Headers ----------------------------------------
+% Preamble for standalone proofs as used in pure supplementary material.
+\lhead{Machine Intelligence II\\Prof. Dr. Obermayer}
+\chead{Proof}
+\rhead{\\Supplementary Material}
+% -----------------------------------------------------------------------------
+
+\begin{document}
+\section{Proof of the Cramer-Rao bound}
+Normalization of the probability density:
+\begin{equation}
+	\int d^p \underline{\mathbf{x}} \underbrace{P_{ \big( 
+		 \{ \underline{\mathbf{x}}^{(\alpha)} \} 
+			; \underline{\mathbf{w}} 
+		\big) } }_{\equiv P}= 1
+\end{equation}
+\begin{equation}
+	\begin{array}{ll}
+	0 & = \frac{\partial}{\partial \underline{\mathbf{w}}} \int d^p 
+		\underline{\mathbf{x}} P\\\\
+	& = \int d^p \underline{\mathbf{x}} 
+		\frac{\partial P}{\partial \underline{\mathbf{w}}}\\\\
+	& = \int d^p P \frac{\partial \ln P}{\partial\underline{\mathbf{w}}}\\\\
+	& = \big<\frac{\partial \ln P}{\partial \underline{\mathbf{w}}} \big>_p
+	\end{array}
+\end{equation}
+we then obtain
+\begin{equation}
+	\begin{array}{ll}
+	\Big<\big(\hat{\mathrm{w}}_i - \mathrm{w}_i^* \big) 
+		\frac{\partial \ln P}{\partial \mathrm{w}_j} 
+		\Big|_{\underline{\mathbf{w}}^*} \Big>_p 
+	& = \Big< \hat{\mathrm{w}}_i \frac{ \overbrace{\partial \ln P}^{ =
+		\frac{1}{P} \frac{\partial P}{\partial \mathrm{w}_j}} 
+		}{\partial \mathrm{w}_j} 
+		\Big|_{\underline{\mathbf{w}}^*} \Big>_p - \mathrm{w}_i^* 
+			\underbrace{\Big<\frac{\partial \ln P}
+				{\partial \mathrm{w}_j}
+			\Big|_{\underline{\mathbf{w}}^*} \Big>_p }_{= 0}\\\\
+	& = \frac{\partial <\hat{\mathrm{w}}_i>_p}{\partial \mathrm{w}_j}
+		\Big|_{\underline{\mathbf{w}}^*}\\\\
+	& = \frac{\partial \mathrm{w}_i}{\partial \mathrm{w}_j} 
+		\Big|_{\underline{\mathbf{w}}^*}\\
+	& \uparrow \text{estimator without bias}\\\\
+	& = \delta_{ij}
+	\end{array}
+\end{equation}
+let $\underline{\mathbf{a}}$ and $\underline{\mathbf{b}}$ be arbitrary vectors, then:
+\begin{equation}
+	\Big< \underline{\mathbf{a}}^T \big(\hat{\underline{\mathbf{w}}} -
+		\underline{\mathbf{w}}^* \big) 
+		\Big( \frac{\partial \ln P}{\partial \underline{\mathbf{w}}}
+		\Big)^T \underline{\mathbf{b}}
+	\Big>\Big|_{\underline{\mathbf{w}}^*}
+	= \underline{\mathbf{a}}^T \underline{\mathbf{b}}
+\end{equation}
+Application of the Cauchy-Schwarz inequality:
+\begin{equation}
+	\bigg\{ \int f_{(\underline{\mathbf{D}})} g_{(\underline{\mathbf{D}})}
+		h_{(\underline{\mathbf{D}})} d \underline{\mathbf{D}}
+	\bigg\}^2 \leq \bigg\{
+		\int f_{(\underline{\mathbf{D}})} g_{(\underline{\mathbf{D}})}^2
+		d \underline{\mathbf{D}}
+	\bigg\} \bigg\{	
+		\int f_{(\underline{\mathbf{D}})} h_{(\underline{\mathbf{D}})}^2
+		d \underline{\mathbf{D}}
+	\bigg\}
+\end{equation}
+with:
+\[ \underline{\mathbf{D}} = \big\{\underline{\mathbf{x}}^{(\alpha)}\big\}
+\]
+\[ f_{(\underline{\mathbf{D}})} = P_{\big(\{\underline{\mathbf{x}}^{(\alpha)}\}
+	, \underline{\mathbf{w}} \big)}
+\]
+\[ g_{(\underline{\mathbf{D}})} = \underline{\mathbf{a}}^T \big(
+	\hat{\underline{\mathbf{w}}} - \underline{\mathbf{w}}^* \big)
+\]
+\[ h_{(\underline{\mathbf{D}})} = \Bigg(\frac{\partial \ln 
+		P_{\big(\{\underline{\mathbf{x}}^{(\alpha)}\}\big)}}{
+			\partial \underline{\mathbf{w}}}
+	\Bigg)^T \underline{\mathbf{b}}
+\]
+yields:
+\begin{equation}	
+	\big( \underline{\mathbf{a}}^T \underline{\mathbf{b}} \big)^2
+	\leq \underline{\mathbf{a}}^T \Big< \big( \hat{\underline{\mathbf{w}}}
+		- \underline{\mathbf{w}}^* \big) 
+	\big( \hat{\underline{\mathbf{w}}} - \underline{\mathbf{w}}^* \big)^T
+	\Big>_p \underline{\mathbf{a}} \underline{\mathbf{b}}^T 
+	\Big< \frac{\partial \ln P}{\partial \underline{\mathbf{w}}}
+	  \Big( \frac{\partial \ln P}{\partial \underline{\mathbf{w}}} \Big)^T
+	\Big>_p\bigg|_{\underline{\mathbf{w}}^*} \underline{\mathbf{b}}
+\end{equation}
+Using:
+\begin{equation}
+	\begin{array}{ll}
+	\Big< \frac{\partial^2 \ln P}{\partial \mathrm{w}_i 
+					\partial \mathrm{w}_j}
+	\Big>_p 
+	& = \Big< \frac{\partial}{\partial \mathrm{w}_i} 
+		\Big( \frac{1}{P} \frac{\partial P}{\partial \mathrm{w}_i}
+		\Big) \Big>_p \\\\
+	& = \Big< \Big\{-\frac{1}{P^2} \frac{\partial P}{\partial \mathrm{w}_i}
+		\frac{\partial P}{\partial \mathrm{w}_j} + \frac{1}{P} 
+		\frac{\partial}{\partial \mathrm{w}_i} \frac{\partial P}{
+			\partial \mathrm{w}_j} \Big\} \Big>_p\\\\
+	& = -\Big< \frac{\partial \ln P}{\partial \mathrm{w}_i} 
+		\frac{\partial \ln P}{\partial \mathrm{w}_j}
+		\Big>_p + \Big< \frac{1}{P}
+		\frac{\partial}{\partial \mathrm{w}_i} 
+			\Big(P \frac{\partial \ln P}{\partial \mathrm{w}_j}
+			\big) \Big>_p\\\\
+	& = -\Big< \frac{\partial \ln P}{\partial \mathrm{w}_i} 
+		\frac{\partial \ln P}{\partial \mathrm{w}_j} \Big>_p 
+		+ \frac{\partial}{\partial \mathrm{w}_i} 
+		\underbrace{\Big< \frac{\partial \ln P}{\partial 
+					\mathrm{w}_j} \Big>_p}_{= 0}
+	\end{array}
+\end{equation}
+we obtain:
+\begin{equation}
+	\big( \underline{\mathbf{a}}^T \underline{\mathbf{b}} \big)^2
+	\leq \big( \underline{\mathbf{a}}^T 
+		\underline{\sum} \underline{\mathbf{a}} \big)
+		\big( \underline{\mathbf{b}}^T \underline{\mathbf{M}}
+			\underline{\mathbf{b}} \big)
+\end{equation}
+let $\underline{\mathbf{b}} = \underline{\mathbf{M}}^{-1} 
+\underline{\mathbf{a}}$ (ok, because $\underline{\mathbf{b}}$ can be an arbitrary vector), then:
+\begin{equation}
+	\big( \underline{\mathbf{a}}^T \underline{\mathbf{M}}^{-1} 
+		\underline{\mathbf{a}} \big)^2 
+	\leq \big( \underline{\mathbf{a}}^T \underline{\sum} 
+		\underline{\mathbf{a}} \big)
+		\big( \underline{\mathbf{b}}^T \underline{\mathbf{M}}^{-1} 
+		\underline{\mathbf{b}} \big)
+\end{equation}
+\begin{equation}
+	\big( \underline{\mathbf{a}}^T \underline{\mathbf{M}}^{-1} 
+		\underline{\mathbf{a}} \big)
+	\leq \big( \underline{\mathbf{a}}^T \underline{\sum}
+		\underline{\mathbf{a}} \big) \text{ for all vectors 
+			$\underline{\mathbf{a}}$}
+\end{equation}
+Consequence:
+\begin{equation}
+	\underline{\sum} - \underline{\mathbf{M}}^{-1} 
+		\text{ is positive semidefinite}
+\end{equation}
+\end{document}

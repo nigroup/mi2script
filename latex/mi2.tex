@@ -1,0 +1,64 @@
+% -----------------------------------------------------------------------------
+% Machine Intelligence II - the script.
+% 
+% current version modified in SS16 by Moritz Augustin
+% -----------------------------------------------------------------------------
+
+\documentclass[a4paper,11pt,titlepage]{article}
+
+\input{header}
+
+\lhead{Machine Intelligence II}
+\title{Machine Intelligence II\\\rule{0.75\textwidth}{2pt}}
+\author{Prof. Dr. Klaus Obermayer}
+
+%\date{}	
+
+\usepackage[backend=biber,style=authoryear,natbib=true, url=false, doi=true, firstinits=true, eprint=false]{biblatex}
+\addbibresource{referencesMI2.bib}
+
+%%\includeonly{section3}
+% -----------------------------------------------------------------------------
+\begin{document}
+\maketitle
+\noindent \textcolor{red}{\underline{Disclaimer:} The lecture has been restructured in the previous terms (SoSe 2017 as well as SoSe 2018) and several new topics were added (and are being added), too. Many of these changes are so far only reflected in the lecture slides but not yet in these lecture notes which are thus outdated. Although we plan to complete the lecture notes soon, it is unlikely that we reach this goal until the end of the term. Therefore, it is strongly recommended to make hand-written notes within the lectures to complement the information of this script. We apologize for the inconvenience.}
+\newpage
+\tableofcontents
+\newpage
+
+% ----------------------  Main Text  -----------------------------------------
+% old topic order was (before SS13 or so): 
+% 1) densitiy estimation first
+% 2) projection
+% 3) stoch opt.
+% 4) clustering/embedding
+% however, figures etc have the old section number so recommendation is to keep internally 
+% the old enumeration
+
+\setcounter{section}{-1}
+\include{section0} %% Introductory comments: Unsupervised Learning
+\include{section2} %% Projection Methods
+\include{section3} %% Stochastic Optimization
+\include{section4} %% Clustering and Embedding
+\include{section1} %% Density Estimation
+\include{section5} %% Model-fitting
+
+
+% % ------------------------------- Supplementary material ----------------------------
+% \newpage
+\section{Supplementary Material}
+\setcounter{equation}{0}
+\input{./proofs/Cramer_Rao_bound/Cramer_Rao_bound_body}
+\input{./proofs/max_likelihood_estimator/max_likelihood_estimator_body}
+\input{./proofs/convergence_oja/convergence_oja_body}
+\input{./proofs/Mercer_theorem/Mercer_theorem_body}
+\input{./proofs/natural_gradient/natural_gradient_body}
+\input{./proofs/kurtosis_optimization/kurtosis_optimization_body}
+\input{./proofs/mean-field_pairwise_clustering/mean-field_pairwise_clustering_body}
+\newpage						% for visual reasons
+\input{./proofs/mean-field_central_clustering/mean-field_central_clustering_body}
+% % -----------------------------------------------------------------------------
+
+
+\printbibliography 
+\end{document}

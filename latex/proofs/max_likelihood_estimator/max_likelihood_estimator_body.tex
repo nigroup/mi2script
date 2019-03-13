@@ -1,0 +1,70 @@
+\subsection{Maximum likelihood estimator is efficient}
+\noindent{\bf\underline{Proof of the claim:}}\\\\
+Maximum likelihood estimator is efficient - if an efficient estimator exists.\\\\
+From the proof of the Cramer-Rao bound it follows, that\\
+$\Rightarrow$ the equality sign in the Cauchy-Schwarz inequality (*) holds, if
+\[ g_{(\underline{\mathbf{D}})} \sim h_{(\underline{\mathbf{D}})}
+\]
+$\Rightarrow$ using the definitions below eq. (*) one obtains
+\begin{equation}
+	\begin{array}{ll}
+	\underbrace{\underline{\mathbf{a}}^T 
+		\overbrace{(\hat{\underline{\mathbf{w}}} - 
+			\underline{\mathbf{w}})}^{\text{efficient estimator}}}_{
+				g_{(\underline{\mathbf{w}})}} 
+	& = \gamma_{(\underline{\mathbf{w}}^*)} 
+		\underbrace{
+		\bigg( \frac{\partial \ln P}{\partial \underline{\mathbf{w}}}
+		\bigg)^T \underline{\mathbf{b}} }_{
+			h_{(\underline{\mathbf{D}})} }\\\\
+	& = \gamma \Big( \frac{\partial \ln P}{\partial \underline{\mathbf{w}}}
+		\Big)^T \underbrace{ \underline{\mathbf{M}}^{-1} 
+			\underline{\mathbf{a}} }_{\text{particular cl??? of }
+				\underline{\mathbf{b}}}
+	\end{array}
+\end{equation}
+since $\underline{\mathbf{a}}$ is an arbitrary vector, we obtain
+\begin{equation}
+	\frac{\partial \ln P}{\partial \underline{\mathbf{w}}}
+	= \frac{1}{\gamma} \underline{\mathbf{M}} (\hat{\underline{\mathbf{w}}}
+		- \underline{\mathbf{w}})
+\end{equation}
+calculation of $\gamma$:
+\begin{equation}
+	\frac{\partial \ln P}{\partial \mathrm{w}_j} 
+	= \sum_k \frac{\mathrm{M}_{jk}}{\gamma} 
+		(\hat{\mathrm{w}}_k - \mathrm{w}_k)
+\end{equation}
+\begin{equation}
+	\frac{\partial^2 \ln P}{\partial \mathrm{w}_i \partial \mathrm{w}_j}
+	= \sum_k \bigg\{ -\frac{\mathrm{M}_{jk}}{\gamma} 
+		\underbrace{ \delta_{ik} }_{\mathrm{w}_k}
+		+ (\hat{\mathrm{w}}_k - \mathrm{w}_k)
+		\frac{\overbrace{\partial}^{\gamma}}{\partial \mathrm{w}_i} 
+		\bigg( \frac{\mathrm{M}_{jk}}{\gamma} \bigg)
+		\bigg\}
+\end{equation}
+\begin{equation}
+	\begin{array}{ll}
+	\mathrm{M}_{ij} 
+	& = \Big< \frac{\partial^2 \ln P}{\partial \mathrm{w}_i
+		\partial \mathrm{w}_j}	\Big>_p 
+		\Big|_{\underline{\mathbf{w}}^*}\\\\
+	& = \frac{\mathrm{M}_{ji}}{\gamma} \text{ because } 
+		<\hat{\mathrm{w}}_k>_p = \mathrm{w}_k^*
+	\end{array}
+\end{equation}
+We obtain:
+\begin{equation}
+	\frac{\partial \ln P}{\partial \underline{\mathbf{w}}} 
+	= \underline{\mathbf{M}} (\hat{\underline{\mathbf{w}}} 
+		- \underline{\mathbf{w}}) \text{ for all vectors }
+		\underline{\mathbf{w}}
+\end{equation}
+For the maximum likelihood estimator we get
+\begin{equation}
+	\underbrace{ \frac{\partial \ln P}{\partial \underline{\mathbf{w}}} 
+		\eqexcl 0}_{\text{max. of likelihood}}
+	\Rightarrow \underline{\mathbf{w}} = \hat{\underline{\mathbf{w}}}
+\end{equation}
+Since $\hat{\underline{\mathbf{w}}}$ is efficient, this also holds for the maximum likelihood estimator.
